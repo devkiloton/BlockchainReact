@@ -21,6 +21,7 @@ import { defineComponent } from "vue";
 import Timer from "./Timer.vue";
 export default defineComponent({
   components: { Timer },
+  emits: ['onTimerEnd'],
   name: 'TaskGenerator',
   data() {
     return {
@@ -37,6 +38,8 @@ export default defineComponent({
     stop(){
       this.timerRunning = false;
       clearInterval(this.timerId);
+      this.$emit('onTimerEnd', this.timeInSeconds);
+      this.timeInSeconds = 0;
     }
   }
 })
